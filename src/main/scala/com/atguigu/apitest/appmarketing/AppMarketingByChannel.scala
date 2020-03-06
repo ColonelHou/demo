@@ -23,7 +23,7 @@ object AppMarketingByChannel {
       })
       // .keyBy("channel", "behavior")
       .keyBy(_._1)
-      .timeWindow(Time.seconds(5), Time.seconds(1))
+      .timeWindow(Time.seconds(10), Time.seconds(5))
       .process(new MarketingCountByChannel)
 
     stream.print()

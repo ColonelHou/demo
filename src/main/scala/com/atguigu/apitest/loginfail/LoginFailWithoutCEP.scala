@@ -10,6 +10,9 @@ import org.apache.flink.util.Collector
 
 import scala.collection.mutable.ListBuffer
 
+/**
+ * 2秒之内连续2次登录失败就告警
+ */
 object LoginFailWithoutCEP {
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
@@ -31,16 +34,16 @@ object LoginFailWithoutCEP {
     env.execute()
   }
 
-  class MatchFunction extends KeyedProcessFunction[String, LoginEvent, String] {
+  class MatchFunction extends KeyedProcessFunction[String, LoginEventOld, String] {
     lazy val loginState = getRuntimeContext.getListState(
-      new ListStateDescriptor[LoginEvent]("login-fail", Types.of[LoginEvent])
+      new ListStateDescriptor[LoginEventOld]("login-fail", Types.of[LoginEventOld])
     )
 
     lazy val timestamp = getRuntimeContext.getState(
       new ValueStateDescriptor[Long]("ts", Types.of[Long])
     )
 
-    override def processElement(value: LoginEvent, ctx: KeyedProcessFunction[String, LoginEvent, String]#Context, out: Collector[String]): Unit = {
+    override def processElement(value: LoginEventOld, ctx: KeyedProcessFunction[String, LoginEventOld, String]#Context, out: Collector[String]): Unit = {
       if (value.eventType == "fail") {
         loginState.add(value)
         if (timestamp.value() == 0L) {
@@ -57,8 +60,8 @@ object LoginFailWithoutCEP {
       }
     }
 
-    override def onTimer(timestamp: Long, ctx: KeyedProcessFunction[String, LoginEvent, String]#OnTimerContext, out: Collector[String]): Unit = {
-      val allLogins = ListBuffer[LoginEvent]()
+    override def onTimer(timestamp: Long, ctx: KeyedProcessFunction[String, LoginEventOld, String]#OnTimerContext, out: Collector[String]): Unit = {
+      val allLogins = ListBuffer[LoginEventOld]()
 
       import scala.collection.JavaConversions._
 
