@@ -1,3 +1,4 @@
+/*
 package com.atguigu.apitest
 
 import org.apache.flink.streaming.api.scala._
@@ -44,3 +45,4 @@ object TableTest {
 
   }
 }
+*/

@@ -9,7 +9,7 @@
     <version>1.9.2</version>
     <properties>
         <scala.version>2.11</scala.version>
-        <flink.version>1.9.2</flink.version>
+        <flink.version>1.10.0</flink.version>
     </properties>
     <dependencies>
         <dependency>
@@ -49,11 +49,6 @@
             <version>1.7.2</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.flink</groupId>
-            <artifactId>flink-table_2.11</artifactId>
-            <version>1.7.2</version>
-        </dependency>
-        <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.10.5</version>
@@ -72,31 +67,38 @@
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-filesystem -->
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-filesystem_2.11</artifactId>
-            <version>1.9.2</version>
+            <artifactId>flink-connector-filesystem_${scala.version}</artifactId>
+            <version>${flink.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-java-bridge_${scala.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${flink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-api-scala-bridge_${scala.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${flink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table-planner_${scala.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${flink.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_${scala.version}</artifactId>
-            <version>${project.version}</version>
+            <version>${flink.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka_${scala.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
 
     </dependencies>
     <build>

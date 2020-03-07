@@ -1,3 +1,4 @@
+/*
 package com.atguigu.apitest
 
 import org.apache.flink.streaming.api.TimeCharacteristic
@@ -54,3 +55,4 @@ object TableWindowTest {
     env.execute("table window test")
   }
 }
+*/

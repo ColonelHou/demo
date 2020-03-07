@@ -21,14 +21,13 @@ object HdfsSink {
       .withRolloverInterval(2000) // 每隔2秒生成一个文件
       .build() // 创建
     // 创建hdfs Sink
-    val hdfsSink: StreamingFileSink[String] = StreamingFileSink.forRowFormat[String](
-      new Path("/bitauto/"),
-      new SimpleStringEncoder("UTF-8"))
-      .withRollingPolicy(policy)
-      .withBucketCheckInterval(1000) // 检查间隔时间
-      .build()
+//    val hdfsSink: StreamingFileSink[String] = StreamingFileSink.forRowFormat[String](
+//      new Path("/bitauto/"),
+//      new SimpleStringEncoder("UTF-8"))
+//      .withRollingPolicy(policy)
+//      .withBucketCheckInterval(1000) // 检查间隔时间
 
-    stream.addSink(hdfsSink)
+//    stream.addSink(hdfsSink)
 
 
 

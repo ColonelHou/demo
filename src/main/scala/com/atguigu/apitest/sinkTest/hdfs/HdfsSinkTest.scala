@@ -33,10 +33,10 @@ object HdfsSinkTest {
       new SimpleStringEncoder[String]("UTF-8")
     ).withRollingPolicy(policy)
       .withBucketAssigner(new EventTimeBucketAssigner)
-        .withBucketCheckInterval(1000)
-        .build()
-    stream.print()
-    stream.addSink(sink).name("Sink HDFS")
+//        .withBucketCheckInterval(1000)
+//        .build()
+//    stream.print()
+//    stream.addSink(sink).name("Sink HDFS")
 
     env.execute("self define source function")
 
