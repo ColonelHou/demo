@@ -14,17 +14,17 @@ import scala.collection.mutable.ListBuffer
  * 2秒之内连续2次登录失败就告警
  */
 object LoginFailWithoutCEP {
-  def main(args: Array[String]): Unit = {
+  /*def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
 
     val stream = env
       .fromElements(
-        LoginEvent("1", "0.0.0.0", "fail", "1"),
+        LoginEvent("1".toLong, "0.0.0.0", "fail", "1".toLong),
 //        LoginEvent("1", "0.0.0.0", "success", "2"),
-        LoginEvent("1", "0.0.0.0", "fail", "3"),
-        LoginEvent("1", "0.0.0.0", "fail", "4")
+        LoginEvent("1".toLong, "0.0.0.0", "fail", "3".toLong),
+        LoginEvent("1".toLong, "0.0.0.0", "fail", "4".toLong)
       )
       .assignAscendingTimestamps(_.eventTime.toLong * 1000)
       .keyBy(_.userId)
@@ -75,5 +75,5 @@ object LoginFailWithoutCEP {
         out.collect("5s以内连续三次登录失败！")
       }
     }
-  }
+  }*/
 }

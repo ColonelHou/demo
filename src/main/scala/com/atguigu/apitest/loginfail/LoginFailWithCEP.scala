@@ -31,7 +31,7 @@ object LoginFailWithCEP {
       })
       .keyBy(_.userId)
 
-    // 定义pattern，关于Pattern的概念请去本系统零章找原版资源学习哦
+    // 定义pattern，关于Pattern的概念请去本系统零章找原版资源学习哦; 定义匹配模式
     val loginFailPattern = Pattern.begin[LoginEvent]("begin").where(_.eventType == "fail")
       .next("next").where(_.eventType == "fail")
       .within(Time.seconds(3))
