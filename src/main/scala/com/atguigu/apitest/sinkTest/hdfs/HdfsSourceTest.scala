@@ -18,7 +18,7 @@ class HdfsSourceTest extends SourceFunction[String]{
       val uuid = UUID.randomUUID()
       val send = date + "," + userId + "," + viewT + "," + uuid
       ctx.collect(send)
-      Thread.sleep(200)
+//      Thread.sleep(10)
     }
   }
 
