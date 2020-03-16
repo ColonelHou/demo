@@ -18,7 +18,7 @@ import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 object ConsumerProducer {
 
-  val outputTag = new OutputTag[(String, Int)]("体温异常")
+  val outputTag: OutputTag[(String, Double)] = new OutputTag[(String, Double)]("体温异常")
   def main(args: Array[String]): Unit = {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     // kafka checkpoint开启
