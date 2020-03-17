@@ -4,6 +4,7 @@ import org.apache.flink.api.common.JobExecutionResult
 import org.apache.flink.api.common.accumulators.LongCounter
 import org.apache.flink.api.common.functions.RichMapFunction
 import org.apache.flink.configuration.Configuration
+import org.apache.flink.streaming.api.functions.sink.SinkFunction
 import org.apache.flink.streaming.api.scala._
 
 /**
@@ -18,7 +19,7 @@ object Real2019 {
     val env = StreamExecutionEnvironment.getExecutionEnvironment
 //    env.registerCachedFile("", "")
 //    IntCounter
-    env.socketTextStream("localhost", 9999)
+    val stream = env.socketTextStream("localhost", 9999)
       .map(line => {
         val arr = line.split(",")
         if (arr(0).toInt > 37) {
@@ -26,7 +27,13 @@ object Real2019 {
         } else {
           ("体温正常", 1)
         }
-      }).keyBy(_._1).sum(1).print()
+      }).keyBy(_._1).sum(1)
+    stream.addSink(new SinkFunction[(String, Int)] {
+      override def invoke(value: (String, Int), context: SinkFunction.Context[_]): Unit = {
+        println(value._1 + " =====> " + value._2)
+      }
+    })
+
     env.execute()
 
   }
